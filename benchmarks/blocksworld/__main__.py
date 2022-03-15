@@ -17,6 +17,8 @@ from tarski.syntax import symref
 
 from tarski.syntax.transform.substitutions import substitute_expression, create_substitution
 from tarski.util import SymbolIndex
+from tarski.sas.util import ground_action_schemas, check_constraints
+from tarski.io.sas.json import dump
 
 from benchmarks.blocksworld.instances import factory, define_domain
 
@@ -29,49 +31,6 @@ def process_command_line():
     parser.add_argument("--verbose", dest='verbose', action='store_true')
     opt = parser.parse_args()
     return opt
-
-
-def check_constraints(C, s, subst):
-    """
-    Returns true if s \models C[x/subst(x)], that is, the result of replacing every variable symbol x by
-    subst(x) in C is satisfiable under s.
-    :param C: A constraint (predicate)
-    :param s: A semantic structure (model) object
-    :param subst: A mapping of variable symbols in C to constants
-    :return:
-    """
-    return all([s[substitute_expression(c, subst)] for c in C])
-
-
-def ground_action_schemas(lang, schemas, domains):
-    """
-    Straightforward grounding by enumeration
-    :param lang: domain theory
-    :param schemas: action schemas to be enumerated
-    :return:
-    """
-
-    actions = []
-    s = tarski.model.create(lang)
-    s.evaluator = evaluate
-
-    for sch in schemas:
-        sch_x = [entry[0] for entry in sch.variables]
-        sch_D = [domains[entry[1]] for entry in sch.variables]
-
-        for a in product(*sch_D):
-            subst = create_substitution(sch_x, a)
-            if not check_constraints(sch.constraints, s, subst):
-                continue
-
-            action_a = Action(name=sch.name,
-                              arguments=a,
-                              transitions=[(substitute_expression(x, subst),
-                                            substitute_expression(pre, subst),
-                                            substitute_expression(post, subst)) for x, pre, post in sch.transitions])
-            actions += [action_a]
-
-    return actions
 
 
 def dump(lang, actions, initial, goal, objects, fp):

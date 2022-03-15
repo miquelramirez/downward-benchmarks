@@ -11,9 +11,7 @@ import tarski
 from tarski import FirstOrderLanguage
 from tarski.syntax import CompoundTerm, Constant
 from tarski.theories import Theory
-
-Schema = namedtuple('Schema', ['name', 'variables', 'constraints', 'transitions'])
-Action = namedtuple('Action', ['name', 'arguments', 'transitions'])
+from tarski.sas import Schema, Action
 
 factory = {}
 

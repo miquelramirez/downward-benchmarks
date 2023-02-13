@@ -2,7 +2,7 @@
 ; Authors: Yannis Dimopoulos, Alfonso Gerevini and Alessandro Saetti
 
 (define (domain Pathways-Propositional) 
-(:requirements :typing :adl)  
+(:requirements :typing)
 
 (:types level molecule - object
         simple complex - molecule) 
@@ -50,20 +50,30 @@
  :precondition (and (synthesis-reaction ?x1 ?x2) (available ?x1))
  :effect (and (available ?x2)))
 
-
-
-(:action DUMMY-ACTION-1
+(:action DUMMY-ACTION-1-1
  :parameters ()
  :precondition
-	(or (available p107-E2F4-DP12p1-gE2)
-	    (available p107-E2F4-DP12p1))
+	(and (available p107-E2F4-DP12p1-gE2))
  :effect (and (goal1)))
 
-(:action DUMMY-ACTION-2
+(:action DUMMY-ACTION-1-2
  :parameters ()
  :precondition
-	(or (available cycDp1)
-	    (available c-Myc-Max))
+	(and (available p107-E2F4-DP12p1))
+ :effect (and (goal1)))
+
+(:action DUMMY-ACTION-2-1
+ :parameters ()
+ :precondition
+	(and (available cycDp1))
  :effect (and (goal2)))
+
+
+(:action DUMMY-ACTION-2-2
+ :parameters ()
+ :precondition
+	(and (available c-Myc-Max))
+ :effect (and (goal2)))
+
 )
 

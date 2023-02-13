@@ -2,7 +2,7 @@
 ; Authors: Yannis Dimopoulos, Alfonso Gerevini and Alessandro Saetti
 
 (define (domain Pathways-Propositional) 
-(:requirements :typing :adl)  
+(:requirements :typing)
 
 (:types level molecule - object
         simple complex - molecule) 
@@ -51,27 +51,42 @@
  :precondition (and (synthesis-reaction ?x1 ?x2) (available ?x1))
  :effect (and (available ?x2)))
 
-
-
-(:action DUMMY-ACTION-1
+(:action DUMMY-ACTION-1-1
  :parameters ()
  :precondition
-	(or (available pRbp1-E2F4-DP12p1)
-	    (available SP1-p107-gP))
+	(and (available pRbp1-E2F4-DP12p1))
  :effect (and (goal1)))
 
-(:action DUMMY-ACTION-2
+
+(:action DUMMY-ACTION-1-2
  :parameters ()
  :precondition
-	(or (available cycA)
-	    (available SP1-p107p1-gP))
+	(and (available SP1-p107-gP))
+ :effect (and (goal1)))
+
+(:action DUMMY-ACTION-2-1
+ :parameters ()
+ :precondition
+	(and (available cycA))
  :effect (and (goal2)))
 
-(:action DUMMY-ACTION-3
+(:action DUMMY-ACTION-2-2
  :parameters ()
  :precondition
-	(or (available cdk46p1-cycD)
-	    (available HDAC1-p107-E2F4-DP12p1))
+	(and (available SP1-p107p1-gP))
+ :effect (and (goal2)))
+
+(:action DUMMY-ACTION-3-1
+ :parameters ()
+ :precondition
+	(and (available cdk46p1-cycD))
+ :effect (and (goal3)))
+)
+
+(:action DUMMY-ACTION-3-2
+ :parameters ()
+ :precondition
+	(and(available HDAC1-p107-E2F4-DP12p1))
  :effect (and (goal3)))
 )
 

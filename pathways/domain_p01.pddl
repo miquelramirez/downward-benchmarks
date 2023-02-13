@@ -2,7 +2,7 @@
 ; Authors: Yannis Dimopoulos, Alfonso Gerevini and Alessandro Saetti
 
 (define (domain Pathways-Propositional) 
-(:requirements :typing :adl)  
+(:requirements :typing)
 
 (:types level molecule - object
 	simple complex - molecule) 
@@ -50,12 +50,28 @@
  :effect (and (available ?x2)))
 
 
+;; MRJ: Reformulation Feb 2023
+;; We note that the construct below is mean to be a compilation of disjunctive goal formulas into
+;; actions with disjunctive effects. The domain can be easily reformulated by breaking this dummy operator
+;; into multiple ones
+;;(:action DUMMY-ACTION-1
+;; :parameters ()
+;; :precondition
+;;	(or (available pRbp1p2-AP2)
+;;	    (available pCAF-p300))
+;; :effect (and (goal1)))
+;;)
 
-(:action DUMMY-ACTION-1
- :parameters ()
- :precondition
-	(or (available pRbp1p2-AP2)
-	    (available pCAF-p300))
- :effect (and (goal1)))
+(:action DUMMY-ACTION-1-1
+    :parameters ()
+    :precondition (and (available pRbp1p2-AP2))
+    :effect (and (goal1))
 )
 
+(:action DUMMY-ACTION-1-2
+    :parameters ()
+    :precondition (and (available pCAF-p300))
+    :effect (and (goal1))
+)
+
+)

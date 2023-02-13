@@ -16,10 +16,10 @@
 	loadarea - transitarea)
 
 (:init
-	(in depot0-1-1 depot0)
+	(part_of depot0-1-1 depot0)
 	(on crate0 container-0-0)
 	(in crate0 container0)
-	(in container-0-0 container0)
+	(part_of container-0-0 container0)
 	(connected loadarea container-0-0) 
 	(connected container-0-0 loadarea)  
 	(connected depot0-1-1 loadarea)

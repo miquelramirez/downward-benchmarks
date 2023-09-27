@@ -1,4 +1,4 @@
-(define (problem strips-sat-x-1)
+(define (problem strips-sat-x-23-HC)
 (:domain satellite)
 (:objects
 	satellite0

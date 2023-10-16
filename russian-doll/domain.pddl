@@ -32,7 +32,7 @@
         :effect (and
             (not (in ?d1 ?d2))
             (empty ?d2)
-            (out ?d1)q
+            (out ?d1)
         )
     )
 )

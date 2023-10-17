@@ -1,50 +1,57 @@
 (define (domain e-step-gadget)
     (:requirements :typing :equality)
 
-    (:types widget - object)
+    (:types widget rank - object)
 
     (:predicates
-        (foo1 ?w - widget)
-        (foo2 ?w - widget)
-        (foo3 ?w - widget)
-        (foo4 ?w - widget)
-        (foo5 ?w - widget)
-        (foo6 ?w - widget)
+        (foo1 ?r - rank ?w - widget)
+        (foo2 ?r - rank ?w - widget)
+        (foo3 ?r - rank ?w - widget)
+        (foo4 ?r - rank ?w - widget)
+        (foo5 ?r - rank ?w - widget)
+        (foo6 ?r - rank ?w - widget)
+        (before ?r1 - rank ?r2 - rank)
     )
 
     (:action action-1
-        :parameters (?w - widget)
+        :parameters (?r1 - rank ?r2 - rank ?w - widget)
         :precondition (and
-            (foo1 ?w)
+            (before ?r2 ?r1)
+            (foo4 ?r2 ?w)
+            (foo1 ?r1 ?w)
         )
         :effect (and
-            (foo4 ?w)
-            (not (foo1 ?w))
+            (foo4 ?r1 ?w)
+            (not (foo1 ?r1 ?w))
         )
     )
 
     (:action action-2
-        :parameters (?w - widget)
+        :parameters (?r1 - rank ?r2 - rank ?w - widget)
         :precondition (and
-            (foo2 ?w)
+            (before ?r2 ?r1)
+            (foo5 ?r2 ?w)
+            (foo2 ?r1 ?w)
         )
         :effect (and
-            (foo5 ?w)
-            (not (foo1 ?w))
-            (not (foo2 ?w))
+            (foo5 ?r1 ?w)
+            (not (foo1 ?r1 ?w))
+            (not (foo2 ?r1 ?w))
         )
     )
 
     (:action action-3
-        :parameters (?w - widget)
+        :parameters (?r1 - rank ?r2 - rank ?w - widget)
         :precondition (and
-            (foo3 ?w)
+            (before ?r2 ?r1)
+            (foo6 ?r2 ?w)
+            (foo3 ?r1 ?w)
         )
         :effect (and
-            (foo6 ?w)
-            (not (foo1 ?w))
-            (not (foo2 ?w))
-            (not (foo3 ?w))
+            (foo6 ?r1 ?w)
+            (not (foo1 ?r1 ?w))
+            (not (foo2 ?r1 ?w))
+            (not (foo3 ?r1 ?w))
         )
     )
 )

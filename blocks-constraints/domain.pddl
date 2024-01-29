@@ -2,7 +2,7 @@
 ;;; 4 Op-blocks world with constraints
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define (domain BLOCKS)
+(define (domain BLOCKS_CONSTRAINTS)
   (:requirements :typing :constraints :equality)
   (:types block - object)
 

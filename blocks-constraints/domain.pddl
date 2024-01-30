@@ -17,11 +17,6 @@
   (:constraints
 
     (and
-        (forall (?x - block ?y - block)
-            (imply    (clear ?x)
-                        (not (on ?x ?y))
-            )
-        )
 
         (forall (?x - block ?y - block)
             (imply    (holding ?x)

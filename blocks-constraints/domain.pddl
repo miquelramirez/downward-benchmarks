@@ -6,7 +6,6 @@
   (:requirements :typing :constraints :equality)
   (:types block - object)
 
-
   (:predicates  (on ?x ?y - block)
 	            (ontable ?x - block)
 	            (clear ?x - block)
@@ -15,37 +14,36 @@
   )
 
   (:constraints
-
     (and
-
         (forall (?x - block ?y - block)
-            (imply    (holding ?x)
-                        (not (on ?x ?y)))
+            (always    (or (not (holding ?x)) (not (on ?x ?y))))
+        )
+
+        (forall (?x - block)
+            (always (or (not (handempty)) (not (holding ?x))))
         )
 
         (forall (?x - block ?y - block)
-                (imply    (on ?x ?y)
-                            (not (clear ?y))
-                )
+            (always
+                (or  (not (on ?x ?y))
+                     (not (clear ?y))))
         )
 
         (forall (?x - block ?y - block)
-                (imply    (on ?x ?y)
-                            (not (holding ?y))
-                )
+            (always (or    (not (on ?x ?y))
+                           (not (holding ?y))))
         )
 
         (forall (?x - block ?y - block)
-                (imply (ontable ?x) (not (on ?x ?y)))
+            (always (or (not (ontable ?x)) (not (on ?x ?y))))
         )
 
         (forall (?x - block ?y - block)
-                (imply (ontable ?x) (not (holding ?x)))
+            (always (or (not (ontable ?x)) (not (holding ?x))))
         )
 
-        (forall (?x - block) (not (on ?x ?x)))
+        (forall (?x - block) (always (not (on ?x ?x))))
     )
-
   )
 
 
